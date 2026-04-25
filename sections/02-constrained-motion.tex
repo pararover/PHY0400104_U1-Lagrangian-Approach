@@ -1,0 +1,283 @@
+\section{Constrained motion and virtual work}
+
+\subsection{Generalized coordinates}
+In three-dimensional space we need three coordinates to specify the position of a single particle. For a system consisting of two particles, we need six coordinates. 
+
+Therefore, a system of $N$ particles requires $3N$ coordinates. For $N$ particles the positions of all the particles are
+$$(x_1,y_1,z_1,x_2,y_2,z_2,\dots,x_N,y_N,z_N)$$.
+
+To avoid being specific about the coordinate system we are using, we denote the coordinates by $q_i$ and refer to them as \textit{generalized coordinates}.
+\begin{itemize}
+	\item If Cartesian coordinates are used then $q_i$ take the values of $(x,y,z)$.
+	
+	\item If spherical coordinates are used then $q_i$ take the values of $(r,\theta,\phi)$.
+	
+	\item If cylindrical coordinates are used then $q_i$ take the values of $(\rho,\phi,z)$
+\end{itemize}
+
+\textbf{Notes}:
+\begin{enumerate}
+	\item It is often convenient to denote all the Cartesian coordinates by the letter $x$. Thus, for a single particle, $(x, y, z)$ is written $(x_1, x_2, x_3)$ and for $N$ particles, $(x_1, y_1,\dots,z_N)$ is expressed as $(x_1,x_2,\dots,x_n)$, where $n = 3N$.
+	\item The dimensions of the generalized coordinates need not be those of length, and may even be dimensionless.
+\end{enumerate}        
+
+The general transformation equations to convert Cartesian coordinates to generalized coordinates are
+\begin{equation} \label{eqn:trans_cc-gen}
+	\begin{aligned}
+		q_1&=q_1(x_1,x_2,\dots,x_n,t) \\
+		q_2&=q_2(x_1,x_2,\dots,x_n,t) \\
+		&\vdots \\
+		q_n&=q_n(x_1,x_2,\dots,x_n,t)
+	\end{aligned}
+\end{equation}
+
+The inverse transformation equations to convert generalized coordinates to Cartesian coordinates are
+\begin{equation} \label{eqn:trans_gen-cc}
+	\begin{aligned}
+		x_1&=x_1(q_1,q_1,\dots,q_n,t) \\
+		x_2&=y_1(q_1,q_1,\dots,q_n,t) \\
+		&\vdots \\
+		x_n&=z_N(q_1,q_1,\dots,q_n,t)
+	\end{aligned}
+\end{equation}
+
+The inverse transformation given in equation (\ref{eqn:trans_gen-cc}) is possible only if the Jacobian determinant of equation (\ref{eqn:trans_cc-gen}) is non-zero, i.e.
+\begin{align*}
+	\dfrac{\partial(q_1,q_2,\dots,q_n)}{\partial(x_1,x_2,\dots,x_n)}=\begin{vmatrix}
+		{\pdv{q_1}{x_1}} & {\pdv{q_1}{x_2}} & {\cdots} & {\pdv{q_1}{x_n}} \\
+		{\pdv{q_2}{x_1}} & {\pdv{q_2}{x_2}} & {\cdots} & {\pdv{q_2}{x_n}} \\
+		{} & {} & {\vdots} & {} \\
+		{\pdv{q_n}{x_1}} & {\pdv{q_n}{x_2}} & {\cdots} & {\pdv{q_n}{x_n}}
+	\end{vmatrix}\neq 0
+\end{align*}
+
+The generalized coordinates are usually assumed to be \textit{linearly independent}, and thus form a \textit{minimal set} of coordinates to describe a problem.
+
+\subsection{Generalized velocities}
+We know that any arbitrary Cartesian coordinate $x_i$ is related to the generalized coordinates $q_j$ as
+\begin{align*}
+	x_i=x_i(q_1,q_2,\dots,q_n,t)
+\end{align*}
+
+The component of the velocity of a particle in the $x_i$ direction is
+\begin{align*}
+	v_i=\dv{x_i}{t}
+\end{align*}
+
+By the chain rule, we have
+\begin{align}
+	v_i&=\pdv{x_i}{q_1}\dv{q_1}{t}+\pdv{x_i}{q_2}\dv{q_2}{t}+\cdots+\pdv{x_i}{q_n}\dv{q_n}{t}+\pdv{x_1}{t} \nonumber\\
+	&=\sum_{k=1}^{n}{\pdv{x_i}{q_k}\dv{q_k}{t}}+\pdv{x_1}{t} \nonumber\\
+	\implies v_i&=\sum_{k=1}^{n}{\pdv{x_i}{q_k}\dot{q_k}}+\pdv{x_1}{t} \label{eqn:gen-vel-01}
+\end{align}
+
+In equation (\ref{eqn:gen-vel-01}), the quantities $\dot{q_k}=\dv{q_k}{t}$ are known as \textit{generalized velocities}.
+
+Now, since a mixed second-order partial derivative does not depend on the order in which the derivatives are taken, we can write
+\begin{align*}
+	\pdv{\dot{q}_j}\pdv{x_i}{t}=\pdv{t}\pdv{x_i}{\dot{q}_j}
+\end{align*}
+Because $x_i$ is independent of the generalized velocities $\dot{q}_k$, we have $\pdv{x_i}{\dot{q}_j}=0$. Hence, we have
+\begin{align}
+	\pdv{\dot{q}_j}\pdv{x_i}{t}=0 \label{eqn:gen-vel-02}
+\end{align}
+
+Differentiating equation (\ref{eqn:gen-vel-01}) with respect to $\dot{q}_j$, we obtain
+\begin{align}
+	\pdv{v_i}{\dot{q}_j}&=\pdv{\dot{q}_j}\sum_{k=1}^{n}{\pdv{x_i}{q_k}\dot{q_k}}+\pdv{\dot{q}_j}\pdv{x_1}{t} \nonumber\\
+	&=\pdv{\dot{q}_j}\sum_{k=1}^{n}{\pdv{x_i}{q_k}\dot{q_k}}+0\qq{[using equation (\ref{eqn:gen-vel-02})]} \nonumber\\
+	&=\sum_{k=1}^{n}{\qty(\pdv{\dot{q}_j}\pdv{x_i}{q_k})\dot{q_k}}+\sum_{k=1}^{n}{\pdv{x_i}{q_k}\pdv{\dot{q_k}}{\dot{q}_j}} \nonumber\\
+	&=0+\sum_{k=1}^{n}{\pdv{x_i}{q_k}\delta_{jk}} \nonumber\\
+	\implies\pdv{v_i}{\dot{q}_j}&=\pdv{x_i}{q_j} \label{eqn:gen-vel-03}
+\end{align}
+
+Equation (\ref{eqn:gen-vel-03}) implies that \textit{the Cartesian velocity is related to the generalized velocity in the same way as the Cartesian coordinate is related to the generalized coordinate}.
+
+\textbf{Note}: The dimensions of the generalized velocities need not be those of length per time squared, and may even be dimensionless.
+
+\subsection{Degrees of freedom}
+The number of degrees of freedom is the number of independent coordinates needed to completely specify the position of every part of the system.
+\begin{itemize}
+	\item To describe the position of a single free particle ($N=1$) one must specify the values of three coordinates (say $x$, $y$ and $z$). Thus, for a free particle, the degrees of freedom is $f=3$.
+	
+	\item For a system of two free particles ($N=2$), we need to specify the positions of both particles. Each particle has three degrees of freedom, so for the system as a whole, the degrees of freedom is $f=6$.
+	
+	\item In general, for a mechanical system consisting of $N$ free particles, the degrees of freedom is $f=3N$, which is the maximum possible degrees of freedom.
+\end{itemize}
+
+For a given system, the number of generalized coordinates always equals its degrees of freedom, i.e. $n=f$.
+
+\subsection{Constraints}
+Constraints on a system of particles are physical limitations or mathematical conditions restricting the positions or velocities of particles, thereby reducing their total degrees of freedom.
+
+When constraints act on a system, its particles are no longer free. Therefore the degrees of freedom reduce by the number of constraints acting on the system.
+
+Constraints are relationships between coordinates of a system. We can illustrate this using the following examples.
+\begin{enumerate}[a)]
+	\item Consider a marble that is free to move on the surface of a table which is at a height of 1 m from the ground. Its motion can be completely described using the $x$ and $y$ coordinates, because it is constrained to move on the plane surface of the table. The constraint on the marble can then be expressed as $z=1$.
+	
+	So, instead of having $f=3$ degrees of freedom, the marble now has $f=2$ degrees of freedom.
+	
+	\item Consider a bead on a stretched string. Its motion can be completely described using the $x$ coordinate alone, because it is constrained to move along the length of the string. The constraints on the bead can then be expressed as $y=0$ and $z=0$.
+	
+	So, instead of having $f=3$ degrees of freedom, the bead now has $f=1$ degree of freedom.
+\end{enumerate}
+
+In both cases above, we find that the degrees of freedom reduces by the number of constraints. In the case of the marble on the table, there is one constraint acting on it, and thereby the degrees of freedom becomes $f=3-1=2$. Likewise, in the case of the bead on the string, due to two constraints acting on it, the degrees of freedom becomes $f=3-2=1$.
+
+In general, if a system of $N$ particles is acted upon by $k$ constraints, then the degrees of freedom of the system becomes $f=3N-k$. Hence, the number of generalized coordinates required to describe the motion is $n=f=3N-k$.
+
+Therefore,
+\begin{itemize}
+	\item Number of particles: $N$
+	\item Number of Cartesian coordinates: $3N$
+	\item Number of constraints: $k$
+	\item Number of generalized coordinates: $n=3N-k$
+\end{itemize}
+
+\subsubsection{Types of constraints}
+\begin{itemize}
+	\item \textbf{Holonomic versus non-holonomic}: This classification relates to how the constraint depends on the coordinates and velocities.
+	\begin{enumerate}
+		\item \textit{Holonomic constraints}: A constraint is holonomic if it can be written as an equation involving the coordinates of the system (and possibly time), but not their velocities. They have the general form:
+		\begin{align*}
+			f(q_1,q_2,\dots,q_n,t)=0
+		\end{align*}
+		Holonomic constraints can be expressed purely in terms of coordinates.
+		
+		\item \textit{Non-holonomic constraints}: A constraint is non-holonomic if it cannot be expressed solely as a coordinate equation. Often these involve \textit{velocities} or are \textit{inequalities} that are not integrable into a coordinate relationship.
+		
+		In non-holonomic constraints, the allowed motion depends on the path the system takes, not just its instantaneous position.
+	\end{enumerate}
+	
+	\item \textbf{Scleronomous versus rheonomous}: This classification relates to whether the constraint depends on time explicitly.
+	\begin{enumerate}
+		\item \textit{Scleronomous constraints}: A constraint is scleronomic if it does not depend explicitly on time, i.e. the equation describing it contains only the coordinates (and possibly velocities), not time itself. These describe fixed constraints.
+		
+		For example, a simple pendulum of fixed length has the constraint $\sqrt{x^2+y^2}-L=0$, which does not involve time explicitly. So this constraint is holonomic as well as schleronomous.
+		
+		\item \textit{Rheonomous constraints}:A constraint is rheonomic if it explicitly depends on time, i.e. the constraint equation includes time as a variable. Rheonomic constraints describe moving or time-dependent limitations on motion.
+		
+		For example, a pendulum whose point of support is itself moving in time (e.g. oscillating up and down) has a constraint that depends on time, and is therefore rheonomous.
+	\end{enumerate}
+\end{itemize}
+
+\setcounter{equation}{0}
+\subsection{Virtual displacements}
+A virtual displacement $\delta x_i$ is defined as an infinitesimal, instantaneous displacement of the coordinate $x_i$ which is consistent with any constraints acting on the system.
+
+\textit{Note}: we distinguish between real and virtual displacements as follows:
+\begin{itemize}
+	\item $\delta x_i$ -- virtual displacement
+	\item $\dd{x_i}$ -- real displacement
+\end{itemize}
+
+Consider the following transformation equation for an arbitrary Cartesian coordinate:
+\begin{align}
+	x_i=x_i(q_1,q_2,\dots,q_n,t) \label{eqn:virt-disp:transf}
+\end{align}
+
+Taking the differential of equation (\ref{eqn:virt-disp:transf}), we obtain
+\begin{align}
+	\dd{x_i}&=\pdv{x_i}{q_1}\dd{q_1}+\pdv{x_i}{q_2}\dd{q_2}+\cdots+\pdv{x_i}{q_n}\dd{q_n}+\pdv{x_i}{t}\dd{t} \nonumber\\
+	\implies\dd{x_i}&=\sum_{\alpha=1}^{n}{\pdv{x_i}{q_\alpha}\dd{q_\alpha}}+\pdv{x_i}{t}\dd{t} \label{eqn:virt-disp:differn}
+\end{align}
+
+However, a virtual displacement is defined to be instantaneous i.e. $\dd{t}=0$. Hence we obtain the virtual displacement using equation (\ref{eqn:virt-disp:differn}) as
+\begin{align}
+	\delta x_i&=\sum_{\alpha=1}^{n}{\pdv{x_i}{q_\alpha}\delta{q_\alpha}} \label{eqn:virt-disp:defn}
+\end{align}
+
+\subsection{Virtual work and generalized force}
+Suppose a system is subjected to a number of applied forces. Let $F_i$ be the component of the force along the coordinate axis $x_i$.
+
+Then by allowing all the Cartesian coordinates to undergo virtual displacements $\delta x_i$, the virtual work performed by the applied forces will be
+\begin{align}
+	\delta W&=\sum_{i=1}^{3N}{F_i\delta x_i} \label{eqn:virt-work:defn}
+\end{align}
+
+Substituting for $\delta x_i$ from equation (\ref{eqn:virt-disp:defn}) in equation (\ref{eqn:virt-work:defn}), we obtain
+\begin{align}
+	\delta W&=\sum_{i=1}^{3N}{F_i \qty(\sum_{\alpha=1}^{n}{\pdv{x_i}{q_\alpha}\delta{q_\alpha}})} \nonumber\\
+	&=\sum_{\alpha=1}^{n}{\qty(\sum_{i=1}^{3N}{F_i\pdv{x_i}{q_\alpha}})\delta{q_\alpha}} \label{eqn:virt-work:rearr}
+\end{align}
+
+We define the \textit{generalized force} as
+\begin{align}
+	Q_\alpha\equiv\sum_{i=1}^{3N}{F_i\pdv{x_i}{q_\alpha}} \label{eqn:virt-work:gen-force}
+\end{align}
+
+Substituting equation (\ref{eqn:virt-work:gen-force}) into equation (\ref{eqn:virt-work:rearr}), we obtain the expression of virtual work in terms of generalized forces and displacements to be
+\begin{align}
+	\Aboxed{\delta W&=\sum_{\alpha=1}^{n}{Q_\alpha\delta{q_\alpha}}} \label{eqn:virt-work:gen-force-displ}
+\end{align}
+
+\textbf{Note}: The dimensions of the generalized forces need not be those of force, and may even be dimensionless.
+
+\setcounter{equation}{0}
+\subsubsection{The principle of virtual work}
+Consider a system of $N$ particles which is in equilibrium. Then the total force on any arbitrary particle vanishes, i.e. $\vb{F}_i=\vb{0}$.
+
+Now, if the virtual displacement of the $i^\text{th}$ particle is $\delta{\vb{r}_i}$, then the virtual work on it due to the force $\vb{F}_i$ also vanishes, i.e. $\delta{W}_i=\vb{F}_i\cdot\delta{\vb{r}_i}=0$. Hence, the sum of virtual work done on all particles must also vanish, i.e.
+\begin{align}
+	\sum_{i=1}^{N}{\vb{F}_i\cdot\delta{\vb{r}_i}}=0 \label{eqn:virt-work-system}
+\end{align}
+
+We can now decompose the force acting on any arbitrary particle into the applied force $\vb{F}_i^{(a)}$ and the force due to the constraints $\vb{f}_i$, i.e.
+\begin{align}
+	\vb{F}_i&=\vb{F}_i^{(a)}+\vb{f}_i \label{eqn:virt-work:net-force}
+\end{align}
+
+Inserting equation (\ref{eqn:virt-work:net-force}) into equation (\ref{eqn:virt-work-system}) gives us
+\begin{align}
+	\sum_{i=1}^{N}{\qty(\vb{F}_i^{(a)}+\vb{f}_i)\cdot\delta{\vb{r}_i}}&=0 \nonumber \\
+	\implies\sum_{i=1}^{N}{\vb{F}_i^{(a)}\cdot\delta{\vb{r}_i}}+\sum_{i=1}^{N}{\vb{f}_i\cdot\delta{\vb{r}_i}}&=0 \label{eqn:virt-work:split}
+\end{align}
+
+Because we restrict ourselves only to those systems where the constraint forces do no work (such as a rigid body), we must have that
+\begin{align*}
+	\sum_{i=1}^{N}{\vb{f}_i\cdot\delta{\vb{r}_i}}&=0
+\end{align*}
+
+Therefore, we obtain from equation (\ref{eqn:virt-work:split})
+\begin{align}
+	\Aboxed{\sum_{i=1}^{N}{\vb{F}_i^{(a)}\cdot\delta{\vb{r}_i}}&=0} \label{eqn:virt-work:principle}
+\end{align}
+
+Equation (\ref{eqn:virt-work:principle}) denotes the \textbf{principle of virtual work}, which states that \emph{for a system in equilibrium, the virtual work done by all applied forces is zero}.
+
+\setcounter{equation}{0}
+\subsection{D'Alembert's principle}
+Consider a system of $N$ particles which are acted upon by various applied and constraint forces. According to Newton's second law of motion, the force acting on an arbitrary $i^\text{th}$ particle is given by
+\begin{align*}
+	\vb{F}_i=\dv{\vb{p}_i}{t}&=\dot{\vb{p}}_i \\
+	\implies\vb{F}_i-\dot{\vb{p}}_i&=\vb{0},\quad i=1,2,\dots,N
+\end{align*}
+The above set of equations imply that any $i^\text{th}$ particle in a system is in equilibrium under a force, which equals the resultant of the actual force $\vb{F}_i$ and an inertial force $-\dot{\vb{p}}_i$.
+
+Hence for virtual displacements $\delta{\vb{r}_i}$, the net virtual work on the system also vanishes, i.e.
+\begin{align}
+	\sum_{i=1}^{N}{\qty(\vb{F}_i-\dot{\vb{p}}_i)\cdot\delta{\vb{r}_i}}&=0 \label{eqn:dap-virt-work}
+\end{align}
+
+But the force on the $i^\text{th}$ particle is due to the applied force $\vb{F}_i^{(a)}$ and the force due to the constraints $\vb{f}_i$, i.e.
+\begin{align*}
+	\vb{F}_i&=\vb{F}_i^{(a)}+\vb{f}_i
+\end{align*}
+
+This gives us, from equation (\ref{eqn:dap-virt-work})
+\begin{align}
+	\sum_{i=1}^{N}{\qty(\vb{F}_i^{(a)}+\vb{f}_i-\dot{\vb{p}}_i)\cdot\delta{\vb{r}_i}}&=0 \nonumber\\
+	\implies\sum_{i=1}^{N}{\qty(\vb{F}_i^{(a)}-\dot{\vb{p}}_i)\cdot\delta{\vb{r}_i}}+\sum_{i=1}^{N}{\vb{f}_i\cdot\delta{\vb{r}_i}}&=0 \label{eqn:dap:virt-work-split}
+\end{align}
+
+Restricting ourselves to systems where the constraint forces do no work, i.e. $\sum_{i=1}^{N}{\vb{f}_i\cdot\delta{\vb{r}_i}}=0$, we have from equation (\ref{eqn:dap:virt-work-split})
+\begin{align*}
+	\sum_{i=1}^{N}{\qty(\vb{F}_i^{(a)}-\dot{\vb{p}}_i)\cdot\delta{\vb{r}_i}}&=0
+\end{align*}
+Because the forces due to the constraints do not appear, we can drop the superscript $^{(a)}$ in the above equation without ambiguity and re-write the same as
+\begin{align}
+	\Aboxed{\sum_{i=1}^{N}{\qty(\vb{F}_i-\dot{\vb{p}}_i)\cdot\delta{\vb{r}_i}}&=0} \label{eqn:dap:statement}
+\end{align}
+
+Equation (\ref{eqn:dap:statement}) denotes the \textbf{D'Alembert's principle}, which states that \emph{the total virtual work done by the applied forces and the inertial forces on a system of particles is zero for any virtual displacement consistent with the constraints of the system}.

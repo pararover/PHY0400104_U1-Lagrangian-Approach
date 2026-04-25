@@ -1,0 +1,52 @@
+\section{Review of Newtonian mechanics}
+
+\subsection{Kinematics}
+Kinematics is the branch of classical mechanics that describes the motion of points, objects, and systems of bodies without considering the forces that cause them to move. It focuses on the geometry of motion, analyzing parameters such as displacement, velocity, acceleration, and time to describe \textit{how objects move}.
+
+\begin{itemize}
+	\item \textbf{Particle}: A material body having mass but no spatial extent.
+	
+	\item \textbf{Position}: The position of a particle is usually specified by the vector $\vb*{r}$ from the origin of a coordinate system to the particle.
+	
+	\item \textbf{Velocity}: The velocity of a particle is defined as the time rate of change of its position:
+	\begin{align*}
+		\vb*{v}=\dv{\vb*{r}}{t}=\dot{\vb*{r}}
+	\end{align*}
+	
+	\item \textbf{Acceleration}: The acceleration of a particle is defined as the time rate of change of its velocity:
+	\begin{align*}
+		\vb*{a}=\dv{\vb*{v}}{t}=\dv[2]{\vb*{r}}{t}=\ddot{\vb*{r}}
+	\end{align*}
+	
+	\item \textbf{Equation of motion}: It is a second-order differential equation for $\vb*{a}$ as a function of $\vb*{r}$, $\dot{\vb*{r}}$ and $t$.
+	
+	\item \textbf{Trajectory}: It is the solution of the equation of motion which gives the position as a function of time, i.e. $\vb*{r}=\vb*{r}(t)$.
+\end{itemize}
+
+\subsection{Dynamics}
+Dynamics is the branch of classical mechanics that describes how forces, torques, and energy cause, change, or maintain the motion of physical bodies. It explains \textit{why objects move}, rather than just how they move. It is governed by Newton's Laws of Motion, Lagrangian mechanics, and Hamiltonian mechanics.
+
+\begin{itemize}
+	\item \textbf{Newton's laws of motion}:
+	\begin{enumerate}
+		\item \textit{First law of motion}: a body not subjected to any external force will move in a straight line at constant speed.
+		
+		\item \textit{Second law of motion}: the rate of change of momentum of a body is equal to the net external force applied to it.
+		\begin{align*}
+			\vb*{F}\propto\dv{\vb*{p}}{t}
+		\end{align*}
+		
+		\item \textit{Third law of motion}: if a body exerts a force on a second body, the second body exerts and equal and opposite force of the same kind on the first one.
+	\end{enumerate}
+	
+	\item \textbf{Conservation laws}: These laws are fundamental principles stating that certain physical properties remain constant over time within an isolated system.
+	\begin{enumerate}
+		\item \textit{Conservation of energy}:  In an isolated system with no non-conservative forces (like friction), the total mechanical energy remains constant. Energy is transformed between kinetic and potential, and not created nor destroyed.
+		
+		\item \textit{Conservation of linear momentum}: If the net external force on a system is zero, the total linear momentum ($\vb*{p}=m\vb*{v}$) remains constant.
+		
+		\item \textit{Conservation of angular momentum}:  If the net external torque on a system is zero, the total angular momentum ($\vb*{L}=I\vb*{\omega}$) remains constant.
+		
+		\item \textit{Conservation of mass}: In non-relativistic dynamics (i.e. for speeds much smaller than the speed of light), the total mass of a closed system is conserved.
+	\end{enumerate}
+\end{itemize}
