@@ -246,14 +246,18 @@
 		\implies\dv{t}\pdv{\lagrangian}{\dot{\theta}}-\pdv{\lagrangian}{\theta}&=0 \label{eqn:lag-equation:simple-pendulum}
 	\end{align}
 	
-	From equation (\ref{eqn:lagrangian:simple-pendulum}), we obtain\vspace{-5ex}
+	From equation (\ref{eqn:lagrangian:simple-pendulum}), we obtain\vspace{-3ex}
+	
 	\begin{multicols}{2}
+		
+		\setlength{\columnseprule}{0.4pt}
 		
 		\begin{align*}
 			\pdv{\lagrangian}{\dot{\theta}}&=2\times\dfrac{1}{2}ml^2\dot{\theta}=ml^2\dot{\theta} \\
 			\implies\dv{t}\pdv{\lagrangian}{\dot{\theta}}&=ml^2\ddot{\theta}
 		\end{align*}
 		
+		\columnbreak		
 		\begin{align*}
 			\pdv{\lagrangian}{\theta}&=\pdv{\theta}\qty[-mgl(1-\cos{\theta})] \\
 			&=\pdv{\theta}\qty[-mgl+mgl\cos{\theta}] \\
@@ -336,12 +340,14 @@
 	\newpage
 	From equation (\ref{eqn:lagrangian:compound-pendulum}), we obtain\vspace{-5ex}
 	\begin{multicols}{2}
+		\setlength{\columnseprule}{0.4pt}
 		
 		\begin{align*}
 			\pdv{\lagrangian}{\dot{\theta}}&=2\times\dfrac{1}{2}I\dot{\theta}=I\dot{\theta} \\
 			\implies\dv{t}\pdv{\lagrangian}{\dot{\theta}}&=I\ddot{\theta}
 		\end{align*}
 		
+		\columnbreak
 		\begin{align*}
 			\pdv{\lagrangian}{\theta}&=\pdv{\theta}\qty[mgl\cos{\theta}] \\
 			&=-mgl\sin{\theta}
